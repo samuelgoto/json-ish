@@ -6,7 +6,7 @@
 
   "author": {
     "@a": {
-      "@href": "/tests/users/1234.json++",
+      "@href": "/tests/users/1234.json-ish",
       "@text": "Sam Goto"
     }
   },

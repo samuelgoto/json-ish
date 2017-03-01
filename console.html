@@ -2,7 +2,7 @@
 
 <script>
 
-  var issues = fetch("/tests/issues.json++")
+  var issues = fetch("/tests/issues.json-ish")
     .then(response => response.json())
     // This is probably the craziest thing ever
     .then(data => {issues = $(data);});
