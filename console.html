@@ -1,0 +1,66 @@
+<script>
+
+  function $(node, opt_parent) {
+    for (var prop in node) {
+
+      // Recursively look into all of the nodes
+      if (typeof node[prop] == "object") {
+	// console.log();
+	node[prop] = $(node[prop], prop);
+      }
+
+      // If we are dealing with reserved keyword
+      switch (prop) {
+	case "@a": {
+	  // console.log("anchor tag");
+	  return function() {
+	    return new Promise(function(resolve, reject) {
+  	      resolve({element: "resolved!"});
+   	    });
+	  }
+	  break;
+	}
+	case "@form": {
+	  var form = node["@form"];
+	  var result = function() {
+	    console.log(arguments);
+	    console.log("form");
+	    console.log(form);
+	    console.log(form["@action"]);
+	    console.log(form["@method"]);
+	    for (var input in form) {
+	    }
+	  }
+	  result.toString = function() {
+	    var description = "";
+	    description += "Form: " + opt_parent + "\n";
+	    description += "Action: " + form["@action"] + "\n";
+	    description += "Method: " + form["@method"] + "\n";
+	    description += "Input:\n";
+	    for (var input in form) {
+	      if (input[0] != '@' &&
+		  form[input]["@input"]) {
+		var required = form[input]["@input"]["@required"];
+		var type = form[input]["@input"]["@type"];
+		description += " - ";
+		description += input;
+		description += ": " + (type ? type : "text") + " ";
+		description += required ? " (required)" : "";
+		description += "\n";
+	      }
+	    }
+	    return description;
+	  }
+	  return result;
+	  break;
+	}
+      }
+    }
+    return node;
+  }
+
+  var issues = fetch("issues.json-ish")
+    .then(response => response.json())
+    .then(issues => Promise.resolve($(issues)));
+
+</script>

@@ -1,0 +1,34 @@
+{
+  "kind": "issue",
+  "id": "1234",
+  "name": "this is an issue",
+  "description": "things are not working!",
+
+  "author": {
+    "@a": { "@href": "/issues", "@text": "All issues" , "@itemprop": "home" }
+  },
+
+  "@link": [{
+    "@rel": "import",
+    "@href": "typical-operations.json+ish"
+  }, {
+    "@rel": "import",
+    "@href": "more-data-about-the-issue.json+ish"
+  }],
+
+  "comment": {
+    "@form": {
+      "@method": "POST",
+      "@action": "/comment",
+      "comment": { "@input": { "@required": false} },
+      "author": { "@input": { "@required": true } }
+    }
+  },
+
+  "delete": {
+    "@form": {
+      "@method": "DELETE",
+      "@action": "/delete"
+    }
+  }
+}
