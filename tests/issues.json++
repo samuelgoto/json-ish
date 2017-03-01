@@ -1,11 +1,14 @@
-{
+[{
   "kind": "issue",
   "id": "1234",
   "name": "this is an issue",
   "description": "things are not working!",
 
   "author": {
-    "@a": { "@href": "/issues", "@text": "All issues" , "@itemprop": "home" }
+    "@a": {
+      "@href": "/tests/users/1234.json++",
+      "@text": "Sam Goto"
+    }
   },
 
   "@link": [{
@@ -31,4 +34,4 @@
       "@action": "/delete"
     }
   }
-}
+}]
