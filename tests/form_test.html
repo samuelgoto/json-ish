@@ -1,0 +1,59 @@
+
+<script src="https://cdn.rawgit.com/google/closure-library/master/closure/goog/base.js">
+</script>
+<script src="../json-ish.js"></script>
+
+<script>
+    goog.require("goog.testing.jsunit");
+    goog.require("goog.testing.MockControl");
+    goog.require("goog.testing.mockmatchers");
+</script>
+
+<script>
+
+  var control = new goog.testing.MockControl();
+  var fetcher = control.createLooseMock(window);
+
+  function setUp() {
+    control.$resetAll();
+  }
+
+  function tearDown() {
+    control.$verifyAll();
+    control.$tearDown();
+  }
+
+  function testFoo() {
+    var form = {
+      "@method": "POST",
+      "@action": "/foobar",
+      "author": {
+	"@input": {"@required": false}
+      },
+      "comment": {
+	"@input": {"@required": true}
+      },
+    };
+
+    var data = {
+      author: "foo",
+      comment: "bar"
+    };
+
+    var data = Promise.resolve({foo: "bar"});
+    var response = Promise.resolve({ok: true, json: function() { return data}});
+
+    fetcher.fetch("/foobar", goog.testing.mockmatchers.isObject)
+	.$returns(response);
+
+    control.$replayAll();
+
+    new Submitter(form, data, fetcher).submit()
+	.then(result => {
+	  console.log(result);
+	})
+        .catch(error => {
+          console.log(error);
+	});
+  }
+</script>
