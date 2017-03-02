@@ -20,6 +20,6 @@ control data support
 - control data for update requests (e.g. <form enctype="application/x-www-form-urlencoded">)
 - control data for interface methods (e.g. <form method="post">)
 - semantic data for links (e.g. <link rel="edit">)
-- 
+ 
 
 
